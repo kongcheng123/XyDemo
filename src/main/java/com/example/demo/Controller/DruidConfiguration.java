@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
+import java.io.IOException;
 
 /**
  * Created by xy on 2017-07-29 23:59
@@ -72,30 +73,39 @@ public class DruidConfiguration {
                                       @Value("${spring.datasource.useGlobalDataSourceStat}")
                                               boolean useGlobalDataSourceStat
 
-    ) throws Exception{
+    ) {
         DruidDataSource dataSource = new DruidDataSource();
-    /*数据源主要配置*/
-        dataSource.setUrl(url);
-        dataSource.setDriverClassName(driver);
-        dataSource.setUsername(userName);
-        dataSource.setPassword(password);
+        try{
+            /*数据源主要配置*/
+            dataSource.setUrl(url);
+            dataSource.setDriverClassName(driver);
+            dataSource.setUsername(userName);
+            dataSource.setPassword(password);
 
     /*数据源补充配置*/
-        dataSource.setMaxActive(maxActive);
-        dataSource.setInitialSize(initialSize);
-        dataSource.setMinIdle(minIdle);
-        dataSource.setMaxWait(maxWait);
-        dataSource.setFilters(filters);
-        dataSource.setTimeBetweenEvictionRunsMillis(timeBetweenEvictionRunsMillis);
-        dataSource.setMinEvictableIdleTimeMillis(minEvictableIdleTimeMillis);
-        dataSource.setValidationQuery(validationQuery);
-        dataSource.setTestOnBorrow(testOnBorrow);
-        dataSource.setTestOnReturn(testOnReturn);
-        dataSource.setTestWhileIdle(testWhileIdle);
-        dataSource.setPoolPreparedStatements(poolPreparedStatements);
-        dataSource.setMaxPoolPreparedStatementPerConnectionSize(maxPoolPreparedStatementPerConnectionSize);
-        dataSource.setConnectionProperties(connectionProperties);
-        dataSource.setUseGlobalDataSourceStat(useGlobalDataSourceStat);
+            dataSource.setMaxActive(maxActive);
+            dataSource.setInitialSize(initialSize);
+            dataSource.setMinIdle(minIdle);
+            dataSource.setMaxWait(maxWait);
+
+            //sql监控的添加
+            dataSource.setFilters(filters);
+
+
+            dataSource.setTimeBetweenEvictionRunsMillis(timeBetweenEvictionRunsMillis);
+            dataSource.setMinEvictableIdleTimeMillis(minEvictableIdleTimeMillis);
+            dataSource.setValidationQuery(validationQuery);
+            dataSource.setTestOnBorrow(testOnBorrow);
+            dataSource.setTestOnReturn(testOnReturn);
+            dataSource.setTestWhileIdle(testWhileIdle);
+            dataSource.setPoolPreparedStatements(poolPreparedStatements);
+            dataSource.setMaxPoolPreparedStatementPerConnectionSize(maxPoolPreparedStatementPerConnectionSize);
+            dataSource.setConnectionProperties(connectionProperties);
+            dataSource.setUseGlobalDataSourceStat(useGlobalDataSourceStat);
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
 
         return dataSource;
 
