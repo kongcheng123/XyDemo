@@ -9,4 +9,5 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional
 public interface AdminDao extends JpaRepository<Admin,Long>{
+
 }

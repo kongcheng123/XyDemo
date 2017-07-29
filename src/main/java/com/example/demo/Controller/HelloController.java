@@ -3,9 +3,13 @@ package com.example.demo.Controller;
 import com.example.demo.Dao.AdminDao;
 import com.example.demo.Model.Admin;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * Created by xy on 2017/7/10.
@@ -15,6 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
     @Autowired
     private AdminDao adminDao;
+
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+
 
     @RequestMapping("/hello")
     public String test(){
@@ -39,4 +47,17 @@ public class HelloController {
         adminDao.save(a);
         return "index";
     }
+
+    @RequestMapping(value = "/hello.do", method = RequestMethod.GET)
+    public String hello() {
+        getNameById(1);
+        return "index";
+    }
+
+    public String getNameById(Integer id) {
+        String sql = "select name from admin where id = ? ";
+        List<String> list = jdbcTemplate.queryForList(sql, new Object[] {id}, String.class);
+        return list.isEmpty() ? null : list.get(0);
+    }
+
 }
