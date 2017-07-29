@@ -30,6 +30,13 @@ public class HelloController {
 
     @RequestMapping("/html")
     public String testHtml(){
+        Admin a=new Admin();
+        a.setName("hahah");
+        a.setPass("hahah");
+        a.setType(0);
+        a.setCreateTime("hahah");
+        a.setUpdateTime("haha");
+        adminDao.save(a);
         return "index";
     }
 }
