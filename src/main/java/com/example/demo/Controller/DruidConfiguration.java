@@ -82,7 +82,7 @@ public class DruidConfiguration {
             dataSource.setUsername(userName);
             dataSource.setPassword(password);
 
-    /*数据源补充配置*/
+            /*数据源补充配置*/
             dataSource.setMaxActive(maxActive);
             dataSource.setInitialSize(initialSize);
             dataSource.setMinIdle(minIdle);
