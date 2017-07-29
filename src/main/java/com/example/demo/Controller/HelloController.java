@@ -2,6 +2,8 @@ package com.example.demo.Controller;
 
 import com.example.demo.Dao.AdminDao;
 import com.example.demo.Model.Admin;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,7 @@ public class HelloController {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    private static final Logger logger = LoggerFactory.getLogger(HelloController.class);
 
     @RequestMapping("/hello")
     public String test(){
@@ -45,12 +48,14 @@ public class HelloController {
         a.setCreateTime("hahah");
         a.setUpdateTime("haha");
         adminDao.save(a);
+        logger.info("hahhaha--");
         return "index";
     }
 
     @RequestMapping(value = "/hello.do", method = RequestMethod.GET)
     public String hello() {
         getNameById(1);
+
         return "index";
     }
 
