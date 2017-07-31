@@ -14,6 +14,7 @@ import java.io.IOException;
 
 /**
  * Created by xy on 2017-07-29 23:59
+ * druid配置
  */
 @Configuration
 public class DruidConfiguration {
